@@ -53,13 +53,13 @@ local function isEnemy(flags)
 	return band(flags, enemy) == enemy 
 end
 
-local function Message(caster, spell, target)
+local function Message(caster, spell, target, msg)
 	local text = frame
 	
 	if target then
-		text:AddMessage("|cffff0000"..caster.."|r is casting |cffD7DC23"..spell.."|r on |cff00ff00"..target.."|r")
+		text:AddMessage("|cffff0000"..caster.."|r"..msg.."|cffD7DC23"..spell.."|r on |cff00ff00"..target.."|r")
 	else
-		text:AddMessage("|cffff0000"..caster.."|r is casting |cffD7DC23"..spell.."|r")
+		text:AddMessage("|cffff0000"..caster.."|r"..msg.."|cffD7DC23"..spell.."|r")
 	end
 	
 	if sound then
@@ -82,12 +82,23 @@ local Update = function(self, event, ...)
 		end
 		
 		if eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_CAST_START" then
+			local msg
+			
 			if isEnemy(sourceFlags) then
 				local guid = sourceGUID
 				local class, classFilename, race, raceFilename, sex, name, unknown = GetPlayerInfoByGUID(guid)
 				local check = spells[spellID]
 				if check then
-					Message(name, spellName, destName)
+					local msg
+					-- define a msg to print according to which event
+					if eventType == "SPELL_CAST_SUCCESS" then
+						msg = " casted "
+					else
+						msg = " is casting "
+					end
+					
+					-- sent screen msg
+					Message(name, spellName, destName, msg)
 				end
 			end
 		end
