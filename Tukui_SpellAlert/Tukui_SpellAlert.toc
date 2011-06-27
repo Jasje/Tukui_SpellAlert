@@ -1,7 +1,7 @@
 ﻿## Interface: 40200
 ## Author: Tukz
 ## Version: 1.0.0
-## Title: |cff1784d1Tukui Spell Alert|r
+## Title: |cffC495DDTukui Spell Alert|r
 ## Notes: Show spell we watch from enemy thought a message in the center of the screen
 ## RequiredDeps: Tukui
 
