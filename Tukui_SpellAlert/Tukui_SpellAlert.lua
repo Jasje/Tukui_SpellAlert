@@ -45,7 +45,6 @@ frame:SetFadeDuration(3)
 frame:SetFont(C.media.font, FONTSIZE, "OUTLINE")
 frame:SetPoint(POINT, X, Y)
 
-local instanceType
 local band, bor = bit.band, bit.bor
 local enemy = bor(COMBATLOG_OBJECT_REACTION_HOSTILE, COMBATLOG_OBJECT_TYPE_PLAYER)
 
@@ -102,7 +101,7 @@ local Update = function(self, event, ...)
 			end
 		end
 	else
-		instanceType = select(2, IsInInstance())
+		local instanceType = select(2, IsInInstance())
 		if instanceType == "pvp" or instanceType == "arena" then
 			self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 		else
