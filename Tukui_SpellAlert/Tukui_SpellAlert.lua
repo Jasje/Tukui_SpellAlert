@@ -82,14 +82,13 @@ local Update = function(self, event, ...)
 		end
 		
 		if eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_CAST_START" then
-			local msg
-			
 			if isEnemy(sourceFlags) then
 				local guid = sourceGUID
 				local class, classFilename, race, raceFilename, sex, name, unknown = GetPlayerInfoByGUID(guid)
 				local check = spells[spellID]
 				if check then
 					local msg
+					
 					-- define a msg to print according to which event
 					if eventType == "SPELL_CAST_SUCCESS" then
 						msg = " casted "
